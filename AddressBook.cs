@@ -136,6 +136,7 @@ namespace AddressBook1.cs
                     {
                         personDetails.Remove(person);
                         Console.WriteLine("\nContact is deleted");
+                        break;
                     }
                 }
                 else
