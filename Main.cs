@@ -9,7 +9,9 @@ namespace AddressBook1.cs
     class AddressBookMain
     {
         //Declaring a dictionary to store multiple contacts with the help of key
-        public static Dictionary<string, LinkedList<Contact>> addressBook = new Dictionary<string, LinkedList<Contact>>();
+        public static Dictionary<string, List<Contact>> addressBook = new Dictionary<string, List<Contact>>();
+        //creating object person1 of AddressBook Class()
+        public static AddressBook person1 = new AddressBook();
 
         static void Main(string[] args)
         {
@@ -21,8 +23,6 @@ namespace AddressBook1.cs
             {
                 Console.WriteLine("Enter the name of the address book: ");
                 string bookName = Console.ReadLine();
-                //creating object person1 of AddressBook Class()
-                AddressBook person1 = new AddressBook();
                 Console.WriteLine("Enter the no of contacts you want to add in the address book: ");
                 int contactNum = Convert.ToInt32(Console.ReadLine());
                 Console.WriteLine("Choose one operation to perform:\n 1-Add a new contact \n 2-Edit a existing contact \n 3-Delete existing contact \n 4-Exit from the operation");
@@ -66,9 +66,29 @@ namespace AddressBook1.cs
                 }
                 noOfBooks++;
             }
-            foreach (KeyValuePair<string, LinkedList<Contact>> item in addressBook)
+            foreach (KeyValuePair<string, List<Contact>> item in addressBook)
             {
                 Console.WriteLine("Existing address books are {0}", item.Key);
+                Console.WriteLine("Enter any key to continue");
+                Console.ReadLine();
+            }
+
+            //Search name based on city or state UC8
+            SearchCity();
+        }
+
+        //method for searching city in the multiple address book
+        public static void SearchCity()
+        {
+            Console.WriteLine("Search person based on city or state");
+            Console.WriteLine("Enter City or State");
+            string cityStateName = Console.ReadLine();
+            //using keyvalue to get value of the key.
+            foreach (KeyValuePair<string, List<Contact>> kvp in addressBook)
+            {
+                Console.WriteLine("The address Books is:{0}", kvp.Key);
+                Console.WriteLine("The Contact List from {0}", cityStateName);
+                person1.SearchbyCityorState(kvp.Value, cityStateName);
                 Console.ReadLine();
             }
         }

@@ -5,9 +5,9 @@ using System.Linq;
 namespace AddressBook1.cs
 {
     class AddressBook
-    {   //Uc7 avoid duplicate entry
+    {   //Uc8 search name based on city or state
         //creating object person from Contact class
-        public LinkedList<Contact> personDetails = new LinkedList<Contact>();
+        public List<Contact> personDetails = new List<Contact>();
 
         //Creating a method for adding contacts in adrressbook
         public void AddPerson()
@@ -35,7 +35,7 @@ namespace AddressBook1.cs
             person.phoneNumber = Console.ReadLine();
             Console.WriteLine("Enter email id");
             person.email = Console.ReadLine();
-            personDetails.AddLast(person);
+            personDetails.Add(person);
         }
 
         //Check and avoid duplicate entries 
@@ -49,6 +49,23 @@ namespace AddressBook1.cs
                 return false;
         }
 
+        //UC8 to search based on city or state
+        public void SearchbyCityorState(List<Contact> list, string cityStateName)
+        {
+            List<Contact> member = list.FindAll(x => x.city.ToLower() == cityStateName || x.state.ToLower() == cityStateName);
+            if (member.Count > 0)
+            {
+                foreach (var members in member)
+                {
+                    Print();
+                }
+            }
+            else
+            {
+                Console.WriteLine("No contacts present");
+            }
+
+        }
         //Printing the address book details 
         public void Print()
         {
