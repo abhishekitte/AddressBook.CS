@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace AddressBook1.cs
 {
     class AddressBook
-    {   //Uc3 to edit contact in an address book
+    {   //Uc4 to delete existing contact from address book
         //creating object person from Contact class
 
         public List<Contact> personDetails = new List<Contact>();
@@ -48,6 +49,7 @@ namespace AddressBook1.cs
                 Console.WriteLine("Email:" + person.email);
             }
         }
+        //reating method for editting existing contact in address book
         public void Edit()
         {
             if (personDetails.Count != 0)
@@ -56,6 +58,7 @@ namespace AddressBook1.cs
                 string edit = Console.ReadLine();
                 foreach (var person in personDetails)
                 {
+                    //ToUpper used to convert to uppercase 
                     if (person.firstName.ToUpper() == edit.ToUpper())
                     {
                         while (true)
@@ -70,6 +73,7 @@ namespace AddressBook1.cs
                             Console.WriteLine("Enter 7 to Change Pincode ");
                             Console.WriteLine("Enter 8 to Exit ");
                             int Option = Convert.ToInt32(Console.ReadLine());
+                            //Switch case statement taken to choose desired operation
                             switch (Option)
                             {
                                 case 1:
@@ -107,7 +111,7 @@ namespace AddressBook1.cs
                     }
                     else
                     {
-                        Console.WriteLine("Enter the valid name!");
+                        Console.WriteLine("Contact does not exist");
                     }
                 }
             }
@@ -116,6 +120,29 @@ namespace AddressBook1.cs
                 Console.WriteLine("Your address book is empty");
             }
         }
+
+        //method for deleating or remove a existing contact
+        public void Delete()
+        {
+            Console.WriteLine("Enter the first name of the person you would like to remove.");
+            string delete = Console.ReadLine();
+            //Tolist() used to return a new list,means input converted to list
+            foreach (var person in personDetails)
+            {
+                if (person.firstName.ToUpper() == delete.ToUpper())
+                {
+                    Console.WriteLine("Are you sure you want to delete this contact?(Y/N)");
+                    if (Console.ReadKey().Key == ConsoleKey.Y)
+                    {
+                        personDetails.Remove(person);
+                        Console.WriteLine("\nContact is deleted");
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Contact is not present");
+                }
+            }
+        }
     }
 }
-
